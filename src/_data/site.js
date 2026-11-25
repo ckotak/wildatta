@@ -109,14 +109,14 @@ export default {
     places: [
       { tag: "Pickup", tone: "brown", title: "From my porch", body: "Thursday and Friday, 4–7pm. I’ll send the address when you get in touch." },
       { tag: "Delivery", tone: "terracotta", title: "Within five miles", body: "Gilroy, Morgan Hill and San Martin. Free over two loaves, otherwise $4." },
-      { tag: "Markets", tone: "wheat", title: "First Saturday", body: "Gilroy farmers’ market, when I have enough hands to manage a table." },
     ],
     contact: {
-      text: "To get a loaf, message me.",
-      linkLabel: "wildatta@gmail.com",
-      href: "mailto:wildatta@gmail.com",
+      text: "To get a loaf, call or text me, or send an email.",
       phone: "408.656.4664",
       phoneHref: "tel:+14086564664",
+      smsHref: "sms:+14086564664",
+      email: "wildatta@gmail.com",
+      emailHref: "mailto:wildatta@gmail.com",
     },
   },
 
