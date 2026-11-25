@@ -1,0 +1,9 @@
+{# ph: mark invented stand-in text. Markers show while site.showPlaceholders is true. #}
+{% macro ph(text, show) %}{% if show %}<mark class="placeholder" title="Placeholder – confirm before launch">{{ text }}</mark>{% else %}{{ text }}{% endif %}{% endmacro %}
+
+{# photo: labelled placeholder for a photograph that has not been shot yet. #}
+{% macro photo(item, ratio) %}
+<figure class="photo" style="--ratio: {{ ratio }}" role="img" aria-label="Placeholder photo: {{ item.label }}">
+  <figcaption class="photo__label">{{ item.label }}{% if item.note %}<span>{{ item.note }}</span>{% endif %}</figcaption>
+</figure>
+{% endmacro %}

@@ -4,11 +4,12 @@ Guidance for AI coding agents working in this repository.
 
 ## Project
 
-Wild Atta is the website for a cottage bakery. It is a static site:
+Wild Atta is the website for a cottage bakery. It is a small static site:
 
-- Plain HTML and CSS, with minimal client-side JavaScript only where it is truly needed.
-- No framework, bundler or build step. Files are served as they are in the repo.
-- Hosted on GitHub Pages.
+- Built with Eleventy (`npm start` to preview, `npm run build` to build into `_site/`).
+- Plain HTML and CSS output, with minimal client-side JavaScript only where it is truly needed.
+- No bundler and no client-side framework. Copy lives in `src/_data/site.js`, markup in `src/`.
+- Hosted on GitHub Pages, deployed by `.github/workflows/pages.yml`.
 
 ## Working on the site
 
