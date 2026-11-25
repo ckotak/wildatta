@@ -114,8 +114,8 @@ layout: base.njk
     </div>
   </section>
 
-  <section class="section section--raised" id="find" aria-labelledby="find-title">
-    <div class="wrap stack">
+  <section class="section section--raised section--tight" id="find" aria-labelledby="find-title">
+    <div class="wrap stack stack--tight">
       <div class="heading heading--center">
         <span class="rule rule--medium rule--short" aria-hidden="true"></span>
         <p class="eyebrow">{{ site.find.eyebrow }}</p>
@@ -130,8 +130,15 @@ layout: base.njk
         </li>
         {% endfor %}
       </ul>
-      <p class="contact">{{ site.find.contact.text }} <a href="{{ site.find.contact.href }}">{{ site.find.contact.linkLabel }}</a> or call <a href="{{ site.find.contact.phoneHref }}">{{ site.find.contact.phone }}</a>.</p>
-      <p class="contact">Follow along: {% for s in site.social %}<a href="{{ s.href }}" rel="me noopener">{{ s.label }} {{ s.handle }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+      <div class="contact">
+        <p class="contact__text">{{ site.find.contact.text }}</p>
+        <ul class="contact__links">
+          <li><a href="{{ site.find.contact.phoneHref }}">Call {{ site.find.contact.phone }}</a></li>
+          <li><a href="{{ site.find.contact.smsHref }}">Text {{ site.find.contact.phone }}</a></li>
+          <li><a href="{{ site.find.contact.emailHref }}">{{ site.find.contact.email }}</a></li>
+        </ul>
+        <p class="contact__social">Follow along: {% for s in site.social %}<a href="{{ s.href }}" rel="me noopener">{{ s.label }} {{ s.handle }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+      </div>
     </div>
   </section>
 
