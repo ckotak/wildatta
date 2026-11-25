@@ -30,3 +30,29 @@ also available offline in `.claude/skills/modern-web-guidance/guides/`.
 
 Agents that don't load skills automatically should read
 `.claude/skills/modern-web-guidance/SKILL.md` directly.
+
+## Never commit (this repo is public)
+
+Everything committed here, including history and every branch and PR, is world-readable and
+effectively permanent. Do not add any of the following, even temporarily:
+
+- **Secrets:** API keys, tokens, passwords, `.env` files, private keys or certificates.
+- **Personal data:** the owner's personal phone number, home address, personal email, or
+  anyone's customer details (orders, names, messages). Pickup addresses are shared privately
+  with customers, never in the repo. Only use contact details Chetan has explicitly said to
+  publish, and prefer a dedicated bakery email address.
+- **Unlicensed assets:** fonts, photos, icons or text without a license that allows
+  publishing. Every font/image must have a known source and license (keep the license file
+  beside it). Do not use stock photos unless the license is recorded.
+- **Design system source:** the `Wild Atta Design System.zip` and other project files are
+  reference only. Copy only the specific tokens and optimized assets the site needs; never
+  commit the zip, source files (PSD, Figma, AI) or unoptimized originals.
+- **Photo metadata:** strip EXIF (especially GPS location) from every photo before adding it.
+- **Real permit numbers and legal details** unless Chetan has confirmed they are public.
+
+If you notice something sensitive already committed, stop and tell Chetan. Do not rewrite
+history or force-push on your own, and note that deleting it in a new commit does not remove it.
+
+Run `sh scripts/setup-hooks.sh` in a fresh clone. The hooks and the CI *Security checks*
+workflow enforce part of this, but they can't catch personal data or license problems, so
+review your own diff before committing.

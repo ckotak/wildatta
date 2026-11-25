@@ -1,0 +1,5 @@
+# Changes to security-sensitive files need the owner's review.
+/.github/            @ckotak
+/.githooks/          @ckotak
+/.gitleaks.toml      @ckotak
+/AGENTS.md           @ckotak

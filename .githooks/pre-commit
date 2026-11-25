@@ -1,0 +1,13 @@
+#!/bin/sh
+# Blocks commits that contain secrets or files that must never be published.
+# Enable with: sh scripts/setup-hooks.sh
+. "$(git rev-parse --show-toplevel)/scripts/check-forbidden-files.sh"
+
+check_forbidden_files "$(git diff --cached --name-only --diff-filter=ACMR)" || exit 1
+
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --redact --config "$(git rev-parse --show-toplevel)/.gitleaks.toml" || exit 1
+else
+  echo "pre-commit: gitleaks is not installed, so the secret scan was skipped."
+  echo "  Install it (brew install gitleaks) to scan staged changes. CI scans every PR regardless."
+fi
