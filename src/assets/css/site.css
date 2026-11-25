@@ -499,3 +499,9 @@ a:hover { color: var(--brown-700); border-bottom-color: var(--brown-700); }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; }
 }
+
+/* 404 page */
+.error-page { min-block-size: 70vh; display: grid; align-items: center; }
+.error-page .eyebrow { margin: 0 0 var(--space-3); }
+.error-page__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-6); margin: 0; }
+.error-page__actions .hero__cta { margin-block-start: var(--space-7); }

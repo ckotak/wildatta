@@ -1,0 +1,25 @@
+---
+layout: error.njk
+permalink: 404.html
+eleventyExcludeFromCollections: true
+title: Page not found – Wild Atta
+description: This page didn’t rise. Head back to Wild Atta, naturally fermented sourdough bread in Gilroy, CA.
+---
+<main id="main" class="error-page">
+  <section class="hero" aria-labelledby="error-title">
+    <img class="hero__logo" src="assets/img/logo-roundel-360.webp"
+         srcset="assets/img/logo-roundel-360.webp 360w, assets/img/logo-roundel-720.webp 720w"
+         sizes="(min-width: 900px) 340px, 240px"
+         alt="Wild Atta roundel: a loaf of bread and wheat stalks" width="340" height="340" fetchpriority="high">
+    <span class="rule rule--short" aria-hidden="true"></span>
+    <p class="eyebrow">Error 404</p>
+    <h1 id="error-title">This page didn’t rise.</h1>
+    <p class="lead">I checked the oven, the proofing basket and the back of the fridge. Nothing here but a little flour dust.</p>
+    <p class="error-page__actions">
+      <a class="hero__cta" href="./">Back to the bakery</a>
+      {%- for s in site.social %}
+      <a class="hero__cta" href="{{ s.href }}">{{ s.label }} {{ s.handle }}</a>
+      {%- endfor %}
+    </p>
+  </section>
+</main>

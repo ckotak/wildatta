@@ -19,7 +19,10 @@ const server = http.createServer((req, res) => {
   if (path.endsWith("/")) path += "index.html";
   const file = join(root, path);
   if (!file.startsWith(root) || !existsSync(file) || !statSync(file).isFile()) {
-    res.writeHead(404).end();
+    // Like GitHub Pages: unknown addresses get 404.html with a 404 status.
+    const page404 = join(root, "404.html");
+    if (existsSync(page404)) res.writeHead(404, { "content-type": "text/html" }).end(readFileSync(page404));
+    else res.writeHead(404).end();
     return;
   }
   res.writeHead(200, { "content-type": types[extname(file)] || "application/octet-stream" });
@@ -49,22 +52,25 @@ const budgets = { ".html": 80 * KB, ".css": 60 * KB, ".js": 30 * KB, ".webp": 15
 const axeSource = readFileSync(resolve("node_modules/axe-core/axe.min.js"), "utf8");
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
 const sizes = [{ name: "phone", width: 375, height: 800 }, { name: "desktop", width: 1280, height: 900 }];
-for (const size of sizes) {
+// The 404 page is served at whatever address is missing, so it is checked at a deep path too.
+const pages = [{ label: "home", path: "/" }, { label: "404", path: "/no/such/loaf/" }];
+for (const pg of pages) for (const size of sizes) {
   const page = await browser.newPage({ viewport: size });
   const external = new Set();
   page.on("request", (r) => { const u = new URL(r.url()); if (u.origin !== base) external.add(u.origin); });
-  await page.goto(`${base}/`, { waitUntil: "networkidle" });
+  const response = await page.goto(`${base}${pg.path}`, { waitUntil: "networkidle" });
+  if (response.status() !== (pg.label === "404" ? 404 : 200)) fail(`[${pg.label} ${size.name}] unexpected status ${response.status()}`);
   await page.addScriptTag({ content: axeSource });
   const { violations } = await page.evaluate(() =>
     axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] } }));
   for (const v of violations) {
-    fail(`[${size.name}] ${v.id} (${v.impact}): ${v.help}\n      ${v.nodes.slice(0, 3).map((n) => n.target.join(" ")).join("\n      ")}`);
+    fail(`[${pg.label} ${size.name}] ${v.id} (${v.impact}): ${v.help}\n      ${v.nodes.slice(0, 3).map((n) => n.target.join(" ")).join("\n      ")}`);
   }
   // No horizontal scrolling on phones.
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-  if (overflow > 0) fail(`[${size.name}] page scrolls sideways by ${overflow}px`);
+  if (overflow > 0) fail(`[${pg.label} ${size.name}] page scrolls sideways by ${overflow}px`);
   // The only third-party hosts allowed are Cloudflare's analytics beacon and its report endpoint.
-  for (const origin of external) if (!analyticsOrigins.has(origin)) fail(`[${size.name}] unexpected third-party request to ${origin}`);
+  for (const origin of external) if (!analyticsOrigins.has(origin)) fail(`[${pg.label} ${size.name}] unexpected third-party request to ${origin}`);
   // Keyboard: every link must show a focus ring and must not hide under the sticky header.
   const stops = await page.evaluate(async () => {
     const out = [];
@@ -75,23 +81,25 @@ for (const size of sizes) {
       const cs = getComputedStyle(el);
       const ring = (cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) > 0) || cs.boxShadow !== "none";
       const top = el.getBoundingClientRect().top;
-      const hidden = !el.classList.contains("skip-link") && !header?.contains(el) && top < header.getBoundingClientRect().bottom;
+      const hidden = !el.classList.contains("skip-link") && header && !header.contains(el) && top < header.getBoundingClientRect().bottom;
       out.push({ name: (el.textContent || el.tagName).trim().slice(0, 40), ring, hidden });
     }
     return out;
   });
   for (const stop of stops) {
-    if (!stop.ring) fail(`[${size.name}] "${stop.name}" shows no focus indicator`);
-    if (stop.hidden) fail(`[${size.name}] "${stop.name}" is hidden under the sticky header when focused`);
+    if (!stop.ring) fail(`[${pg.label} ${size.name}] "${stop.name}" shows no focus indicator`);
+    if (stop.hidden) fail(`[${pg.label} ${size.name}] "${stop.name}" is hidden under the sticky header when focused`);
   }
   await page.close();
 }
 // Reflow at 320px wide (WCAG 1.4.10): no sideways scrolling.
 {
   const page = await browser.newPage({ viewport: { width: 320, height: 640 } });
-  await page.goto(`${base}/`, { waitUntil: "networkidle" });
+  for (const path of ["/", "/no/such/loaf/"]) {
+  await page.goto(`${base}${path}`, { waitUntil: "networkidle" });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-  if (overflow > 0) fail(`[320px] page scrolls sideways by ${overflow}px`);
+  if (overflow > 0) fail(`[320px ${path}] page scrolls sideways by ${overflow}px`);
+  }
   await page.close();
 }
 await browser.close();
