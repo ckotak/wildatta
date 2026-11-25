@@ -1,0 +1,59 @@
+# THIS WEEK AT WILD ATTA
+#
+# This is the only file you need to edit each week. Change the words between the
+# quote marks, save, and the site updates after the change is merged.
+#
+# Tips
+#  - Keep the quote marks around every value.
+#  - Keep the indentation (the spaces at the start of each line) exactly as it is.
+#  - Lines starting with # are notes and are ignored.
+#  - To hide something, leave it empty ("") or, for a section, set show to false.
+#    Nothing empty is ever displayed on the page.
+
+# The week shown next to the bake list. Example: "Week of 7 December"
+week: "Week of 30 November"
+
+# A short note shown above the bakes, for news that matters this week.
+# Example: "No bake on Friday this week. Back the week after."
+# Leave empty for no note.
+announcement: ""
+
+# What is baking. Add, remove or reorder items freely. Each item starts with "- name".
+# Set soldOut to true once a bake is gone; it stays listed with a "Sold out" mark.
+# tags are the small labels, like the day it bakes. Leave tags as [] for none.
+bakesNote: "The list changes with the week and the weather."
+bakes:
+  - name: "Country wholemeal"
+    description: "Half stone-milled atta, half bread flour. Deep crust, open crumb, faintly nutty."
+    meta: "30-hour ferment"
+    tags: ["Bakes Thursday"]
+    soldOut: false
+
+  - name: "Ajwain & sea salt"
+    description: "Carom seed through the crumb, flaked salt on top. Eat it with butter and nothing else."
+    meta: "24-hour cold proof"
+    tags: ["Bakes Friday"]
+    soldOut: false
+
+  - name: "Cardamom cinnamon rolls"
+    description: "Sourdough enriched with butter and cardamom, rolled tight, baked in a tray of six."
+    meta: "Overnight proof"
+    tags: ["Fridays only", "Six per tray"]
+    soldOut: false
+
+# Pickup this week, if it differs from the usual. Leave empty to use the usual wording.
+# Example: "Thursday only this week, 4–6pm. I’ll send the address when you get in touch."
+pickup: ""
+
+# A farmers market or pop-up. Off by default.
+# To switch it on: fill in the details and change show to true.
+# It appears as a card in the "Where to find me" section.
+market:
+  show: false
+  name: "Gilroy Farmers Market"
+  when: "Saturday 5 December, 8am–1pm"
+  where: "Gilroy, CA"
+  note: "I’ll have a small table of loaves. Come early, they go quickly."
+
+# More sections later: to add another optional section (a class, a holiday order list,
+# a special bake), ask for it. It gets its own block here with the same show switch.

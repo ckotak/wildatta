@@ -65,25 +65,30 @@ layout: base.njk
           <h2 id="bakes-title">{{ site.bakes.title }}</h2>
         </div>
         <p class="tags">
-          <span class="tag tag--olive">{{ ph(site.bakes.week, show) }}</span>
+          {% if thisWeek.week %}<span class="tag tag--olive">{{ ph(thisWeek.week, show) }}</span>{% endif %}
           <span class="tag tag--muted">{{ site.bakes.allergen }}</span>
         </p>
       </div>
+      {% if thisWeek.announcement %}<p class="announcement">{{ thisWeek.announcement }}</p>{% endif %}
+      {% if thisWeek.bakes and thisWeek.bakes.length %}
       <ul class="bakes">
-        {% for b in site.bakes.items %}
+        {% for b in thisWeek.bakes %}
         <li>
-          <article class="bake">
+          <article class="bake{% if b.soldOut %} bake--sold-out{% endif %}">
             {{ photo({ label: b.name, note: "Crust, close" }, "4 / 5") }}
             <span class="rule rule--hairline" aria-hidden="true"></span>
             <h3>{{ b.name }}</h3>
             <p class="bake__desc">{{ ph(b.description, show) }}</p>
-            <p class="bake__meta">{{ b.meta }}</p>
-            <p class="tags">{% for t in b.tags %}<span class="tag">{{ ph(t, show) }}</span>{% endfor %}</p>
+            {% if b.meta %}<p class="bake__meta">{{ b.meta }}</p>{% endif %}
+            {% if b.tags.length or b.soldOut %}<p class="tags">{% if b.soldOut %}<span class="tag tag--sold-out">Sold out</span>{% endif %}{% for t in b.tags %}<span class="tag">{{ ph(t, show) }}</span>{% endfor %}</p>{% endif %}
           </article>
         </li>
         {% endfor %}
       </ul>
-      <p class="note">{{ site.bakes.note }}</p>
+      {% else %}
+      <p class="lead">Nothing is listed for this week yet. Check back soon.</p>
+      {% endif %}
+      {% if thisWeek.bakesNote %}<p class="note">{{ thisWeek.bakesNote }}</p>{% endif %}
     </div>
   </section>
 
@@ -126,9 +131,16 @@ layout: base.njk
         <li class="card card--{{ p.tone }}">
           <p class="tag tag--muted">{{ p.tag }}</p>
           <h3>{{ p.title }}</h3>
-          <p>{{ ph(p.body, show) }}</p>
+          <p>{{ ph(thisWeek.pickup if (thisWeek.pickup and p.tag == "Pickup") else p.body, show) }}</p>
         </li>
         {% endfor %}
+        {% if thisWeek.market and thisWeek.market.show and thisWeek.market.name %}
+        <li class="card card--olive">
+          <p class="tag tag--muted">Market</p>
+          <h3>{{ thisWeek.market.name }}</h3>
+          <p>{% if thisWeek.market.when %}{{ thisWeek.market.when }}{% endif %}{% if thisWeek.market.where %}{% if thisWeek.market.when %}, {% endif %}{{ thisWeek.market.where }}{% endif %}.{% if thisWeek.market.note %} {{ thisWeek.market.note }}{% endif %}</p>
+        </li>
+        {% endif %}
       </ul>
       <div class="contact">
         <p class="contact__text">{{ site.find.contact.text }}</p>

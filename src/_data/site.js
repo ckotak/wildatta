@@ -66,30 +66,8 @@ export default {
 
   bakes: {
     eyebrow: "What I bake",
-    title: "Three things, done properly",
-    week: "Week of 30 November",
+    title: "Baked properly, a few at a time",
     allergen: "Contains wheat",
-    note: "The list changes with the week and the weather.",
-    items: [
-      {
-        name: "Country wholemeal",
-        description: "Half stone-milled atta, half bread flour. Deep crust, open crumb, faintly nutty.",
-        meta: "30-hour ferment",
-        tags: ["Bakes Thursday"],
-      },
-      {
-        name: "Ajwain & sea salt",
-        description: "Carom seed through the crumb, flaked salt on top. Eat it with butter and nothing else.",
-        meta: "24-hour cold proof",
-        tags: ["Bakes Friday"],
-      },
-      {
-        name: "Cardamom cinnamon rolls",
-        description: "Sourdough enriched with butter and cardamom, rolled tight, baked in a tray of six.",
-        meta: "Overnight proof",
-        tags: ["Fridays only", "Six per tray"],
-      },
-    ],
   },
 
   process: {
