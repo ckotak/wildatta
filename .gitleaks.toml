@@ -5,11 +5,8 @@ title = "Wild Atta gitleaks config"
 useDefault = true
 
 [allowlist]
-description = "Vendored third-party guide text, which contains example snippets"
+description = "Vendored third-party guide text, which contains example snippets, and the public analytics token"
 paths = ['''^\.claude/skills/modern-web-guidance/guides/''']
-
 # The Cloudflare Web Analytics site token is public by design: it is printed in the
 # page source of every visit. It is not a secret and cannot read any account data.
-[[allowlists]]
-description = "Public Cloudflare Web Analytics beacon token"
 regexes = ['''858508dc08994431a6aa6fee1b2818d2''']
