@@ -30,7 +30,7 @@ export default {
   // needs no consent banner. Paste the site token from Cloudflare (Analytics & Logs >
   // Web Analytics > your site > Manage site > JS snippet, the value after "token":).
   // The token is public by design. Leave it empty to turn analytics off.
-  analytics: { cloudflareToken: "" },
+  analytics: { cloudflareToken: "858508dc08994431a6aa6fee1b2818d2" },
 
   // Public social profiles. Add more here (and they appear in the Find section).
   social: [

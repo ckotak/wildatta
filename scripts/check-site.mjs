@@ -28,6 +28,7 @@ const server = http.createServer((req, res) => {
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const base = `http://127.0.0.1:${server.address().port}`;
 
+const analyticsOrigins = new Set(["https://static.cloudflareinsights.com", "https://cloudflareinsights.com"]);
 let failures = 0;
 const fail = (msg) => { failures++; console.error(`FAIL  ${msg}`); };
 
@@ -62,8 +63,8 @@ for (const size of sizes) {
   // No horizontal scrolling on phones.
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   if (overflow > 0) fail(`[${size.name}] page scrolls sideways by ${overflow}px`);
-  // The only third-party host allowed is Cloudflare's analytics beacon.
-  for (const origin of external) if (origin !== "https://static.cloudflareinsights.com") fail(`[${size.name}] unexpected third-party request to ${origin}`);
+  // The only third-party hosts allowed are Cloudflare's analytics beacon and its report endpoint.
+  for (const origin of external) if (!analyticsOrigins.has(origin)) fail(`[${size.name}] unexpected third-party request to ${origin}`);
   // Keyboard: every link must show a focus ring and must not hide under the sticky header.
   const stops = await page.evaluate(async () => {
     const out = [];
