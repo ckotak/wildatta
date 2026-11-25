@@ -25,6 +25,11 @@ export default {
     "Naturally leavened bread and cardamom cinnamon rolls, baked one batch at a time in Gilroy, California.",
   showPlaceholders: true,
 
+  // Public social profiles. Add more here (and they appear in the Find section).
+  social: [
+    { label: "Instagram", handle: "@wildatta", href: "https://www.instagram.com/wildatta/" },
+  ],
+
   nav: [
     { label: "Story", href: "#story" },
     { label: "Bakes", href: "#bakes" },

@@ -131,6 +131,7 @@ layout: base.njk
         {% endfor %}
       </ul>
       <p class="contact">{{ site.find.contact.text }} <a href="{{ site.find.contact.href }}">{{ ph(site.find.contact.linkLabel, show) }}</a></p>
+      <p class="contact">Follow along: {% for s in site.social %}<a href="{{ s.href }}" rel="me noopener">{{ s.label }} {{ s.handle }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
     </div>
   </section>
 
