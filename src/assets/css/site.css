@@ -277,6 +277,10 @@ a:hover { color: var(--brown-700); border-bottom-color: var(--brown-700); }
   background: var(--wheat-100);
   color: var(--brown-700);
 }
+.draft-banner p {
+  margin: 0;
+  max-inline-size: none;
+}
 
 /* Photo placeholders: hatched box, labelled with the art direction. */
 .photo {
@@ -291,6 +295,7 @@ a:hover { color: var(--brown-700); border-bottom-color: var(--brown-700); }
   overflow: hidden;
 }
 .photo__label {
+  display: block;
   padding: var(--space-4);
   text-align: center;
   font-size: var(--fs-caption);

@@ -3,7 +3,7 @@
 
 {# photo: labelled placeholder for a photograph that has not been shot yet. #}
 {% macro photo(item, ratio) %}
-<figure class="photo" style="--ratio: {{ ratio }}" role="img" aria-label="Placeholder photo: {{ item.label }}">
-  <figcaption class="photo__label">{{ item.label }}{% if item.note %}<span>{{ item.note }}</span>{% endif %}</figcaption>
-</figure>
+<div class="photo" style="--ratio: {{ ratio }}" role="img" aria-label="Placeholder photo: {{ item.label }}">
+  <span class="photo__label">{{ item.label }}{% if item.note %}<span>{{ item.note }}</span>{% endif %}</span>
+</div>
 {% endmacro %}

@@ -48,3 +48,8 @@ without extra configuration.
 Colours, type and spacing come from the Wild Atta Design System tokens. The logo roundel has
 known defects (a doubled A in the curved tagline), so it is used large in the hero and small in
 the header and footer only until a clean vector exists.
+
+## Checks and analytics
+
+- `npm run check` builds the site, then runs `scripts/check-site.mjs`: axe-core accessibility checks (WCAG 2.2 AA) at phone and desktop widths, a no-sideways-scroll check, a no-unexpected-third-party check, and file-size budgets. It runs on every pull request and before every deploy. Locally, install a browser once with `npx playwright install chromium`.
+- Visitor stats use Cloudflare Web Analytics (cookieless, no consent banner). Set `analytics.cloudflareToken` in `src/_data/site.js`; while it is empty, no analytics script is added.
