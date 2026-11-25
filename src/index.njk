@@ -133,11 +133,8 @@ layout: base.njk
       <div class="contact">
         <p class="contact__text">{{ site.find.contact.text }}</p>
         <ul class="contact__links">
-          <li><a href="{{ site.find.contact.phoneHref }}">Call {{ site.find.contact.phone }}</a></li>
-          <li><a href="{{ site.find.contact.smsHref }}">Text {{ site.find.contact.phone }}</a></li>
-          <li><a href="{{ site.find.contact.emailHref }}">{{ site.find.contact.email }}</a></li>
+          {% for s in site.social %}<li><a href="{{ s.href }}" rel="me noopener">Message me on {{ s.label }} {{ s.handle }}</a></li>{% endfor %}
         </ul>
-        <p class="contact__social">Follow along: {% for s in site.social %}<a href="{{ s.href }}" rel="me noopener">{{ s.label }} {{ s.handle }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
       </div>
     </div>
   </section>

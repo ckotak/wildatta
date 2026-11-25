@@ -117,12 +117,11 @@ export default {
       { tag: "Delivery", tone: "terracotta", title: "Within five miles", body: "Gilroy, Morgan Hill and San Martin. Free over two loaves, otherwise $4." },
     ],
     contact: {
-      text: "To get a loaf, call or text me, or send an email.",
-      phone: "408.656.4664",
-      phoneHref: "tel:+14086564664",
-      smsHref: "sms:+14086564664",
-      email: "wildatta@gmail.com",
-      emailHref: "mailto:wildatta@gmail.com",
+      text: "To get a loaf, send me a message on Instagram.",
+      // Phone and email are deliberately left out of the site for now, to keep them
+      // away from scraping bots. To bring them back, add `phone`, `phoneHref`,
+      // `smsHref`, `email` and `emailHref` here and restore the links in
+      // src/index.njk. Do not commit them until Chetan says to.
     },
   },
 
