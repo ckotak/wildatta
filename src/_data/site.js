@@ -8,7 +8,19 @@
 
 export default {
   name: "Wild Atta",
-  url: "https://ckotak.github.io/wildatta/",
+  // The one place the public address lives. Canonical, Open Graph and sitemap-style
+  // absolute URLs are all built from it. No trailing slash.
+  url: "https://wildatta.com",
+  title: "Wild Atta – sourdough and cardamom rolls in Gilroy",
+  locale: "en_US",
+  themeColor: "#F7EFE5",
+  // Link-preview image, 1200x630. Path is relative to the site root.
+  share: {
+    image: "assets/img/share.jpg",
+    width: 1200,
+    height: 630,
+    alt: "Wild Atta logo: a hand-lettered wordmark with wheat sprigs, beside the words “Naturally leavened bread, baked one batch at a time. Gilroy, California.”",
+  },
   description:
     "Naturally leavened bread and cardamom cinnamon rolls, baked one batch at a time in Gilroy, California.",
   showPlaceholders: true,
