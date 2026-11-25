@@ -1,0 +1,146 @@
+---
+layout: base.njk
+---
+{% from "macros.njk" import ph, photo %}
+{% set show = site.showPlaceholders %}
+
+{% if show %}
+<p class="draft-banner" role="note">Draft. Dotted underlines and hatched boxes mark placeholder copy and photos that still need real content.</p>
+{% endif %}
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__brand" href="#top">
+      <img src="assets/img/logo-roundel-96.webp" alt="" width="44" height="44">
+      <span>Wild Atta</span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="site-nav">
+        {% for item in site.nav %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <img class="hero__logo" src="assets/img/logo-roundel-360.webp"
+         srcset="assets/img/logo-roundel-360.webp 360w, assets/img/logo-roundel-720.webp 720w"
+         sizes="(min-width: 900px) 340px, 240px"
+         alt="Wild Atta roundel: a loaf of bread and wheat stalks" width="340" height="340" fetchpriority="high">
+    <span class="rule rule--short" aria-hidden="true"></span>
+    <h1 id="hero-title">{{ site.hero.title }}</h1>
+    <p class="lead">{{ site.hero.lead }}</p>
+    <a class="hero__cta" href="#bakes">{{ site.hero.cta }}</a>
+    <div class="hero__photo">{{ photo(site.hero.photo, "21 / 9") }}</div>
+  </section>
+
+  <section class="section section--raised" id="story" aria-labelledby="story-title">
+    <div class="wrap story">
+      <div class="story__photo">{{ photo(site.story.photo, "1 / 1") }}</div>
+      <div class="story__text">
+        <div class="heading">
+          <span class="rule rule--medium" aria-hidden="true"></span>
+          <p class="eyebrow">{{ site.story.eyebrow }}</p>
+          <h2 id="story-title"><span class="script">{{ site.story.script }}</span> {{ site.story.title }}</h2>
+        </div>
+        <p class="lead"><em>Atta</em> is the word for wholemeal flour across North India and Pakistan. <em>Wild</em> is the yeast that was already in the room.</p>
+        {% for p in site.story.paragraphs %}<p>{{ ph(p, show) }}</p>{% endfor %}
+        <figure class="pullquote">
+          <span class="rule rule--heavy rule--terracotta" aria-hidden="true"></span>
+          <blockquote>{{ site.story.quote }}</blockquote>
+          <figcaption class="eyebrow">{{ site.story.quoteBy }}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bakes" aria-labelledby="bakes-title">
+    <div class="wrap stack">
+      <div class="bakes__head">
+        <div class="heading">
+          <span class="rule rule--medium" aria-hidden="true"></span>
+          <p class="eyebrow">{{ site.bakes.eyebrow }}</p>
+          <h2 id="bakes-title">{{ site.bakes.title }}</h2>
+        </div>
+        <p class="tags">
+          <span class="tag tag--olive">{{ ph(site.bakes.week, show) }}</span>
+          <span class="tag tag--muted">{{ site.bakes.allergen }}</span>
+        </p>
+      </div>
+      <ul class="bakes">
+        {% for b in site.bakes.items %}
+        <li>
+          <article class="bake">
+            {{ photo({ label: b.name, note: "Crust, close" }, "4 / 5") }}
+            <span class="rule rule--hairline" aria-hidden="true"></span>
+            <h3>{{ b.name }}</h3>
+            <p class="bake__desc">{{ ph(b.description, show) }}</p>
+            <p class="bake__meta">{{ b.meta }}</p>
+            <p class="tags">{% for t in b.tags %}<span class="tag">{{ ph(t, show) }}</span>{% endfor %}</p>
+          </article>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="note">{{ site.bakes.note }}</p>
+    </div>
+  </section>
+
+  <section class="section section--inverse" id="process" aria-labelledby="process-title">
+    <div class="wrap stack">
+      <div class="process__head">
+        <div class="heading">
+          <span class="rule rule--medium rule--wheat" aria-hidden="true"></span>
+          <p class="eyebrow">{{ site.process.eyebrow }}</p>
+          <h2 id="process-title"><span class="script">{{ site.process.script }}</span> {{ site.process.title }}</h2>
+        </div>
+        <p class="lead">{{ site.process.lead }}</p>
+      </div>
+      <ol class="steps">
+        {% for s in site.process.steps %}
+        <li>
+          <span class="rule rule--medium rule--wheat" aria-hidden="true"></span>
+          <p class="eyebrow">{{ loop.index | pad2 }} · {{ s.hours }}</p>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.body }}</p>
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="process__photos">
+        {{ photo(site.process.photos[0], "21 / 9") }}
+        {{ photo(site.process.photos[1], "21 / 9") }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--raised" id="find" aria-labelledby="find-title">
+    <div class="wrap stack">
+      <div class="heading heading--center">
+        <span class="rule rule--medium rule--short" aria-hidden="true"></span>
+        <p class="eyebrow">{{ site.find.eyebrow }}</p>
+        <h2 id="find-title">{{ site.find.title }}</h2>
+      </div>
+      <ul class="cards">
+        {% for p in site.find.places %}
+        <li class="card card--{{ p.tone }}">
+          <p class="tag tag--muted">{{ p.tag }}</p>
+          <h3>{{ p.title }}</h3>
+          <p>{{ ph(p.body, show) }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="contact">{{ site.find.contact.text }} <a href="{{ site.find.contact.href }}">{{ ph(site.find.contact.linkLabel, show) }}</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer">
+    <img src="assets/img/logo-roundel-96.webp" alt="Wild Atta" width="88" height="88">
+    <p>{{ site.footer.legal }} {{ ph(site.footer.permit, show) }}, issued by {{ ph(site.footer.county, show) }}. {{ site.footer.legalEnd }}</p>
+    <p>{{ site.footer.allergens }}</p>
+    <p class="copyright">© {{ site.footer.year }} Wild Atta · Gilroy, California</p>
+  </div>
+</footer>

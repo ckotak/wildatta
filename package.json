@@ -1,0 +1,15 @@
+{
+  "name": "wildatta",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website for Wild Atta, a cottage bakery in Gilroy, California.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  }
+}
