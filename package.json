@@ -4,12 +4,18 @@
   "private": true,
   "description": "Website for Wild Atta, a cottage bakery in Gilroy, California.",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "check": "npm run build && npm run check:site",
+    "check:site": "node scripts/check-site.mjs"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "axe-core": "^4.14.1",
+    "playwright": "^1.65.1"
   }
 }
