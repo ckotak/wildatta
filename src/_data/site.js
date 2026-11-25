@@ -21,8 +21,9 @@ export default {
     height: 630,
     alt: "Wild Atta logo: a hand-lettered wordmark with wheat sprigs, beside the words “Naturally leavened bread, baked one batch at a time. Gilroy, California.”",
   },
+  tagline: "Naturally fermented sourdough bread. Gilroy, CA.",
   description:
-    "Naturally leavened bread and cardamom cinnamon rolls, baked one batch at a time in Gilroy, California.",
+    "Naturally fermented sourdough bread. Gilroy, CA. Baked one batch at a time, with cardamom cinnamon rolls too.",
   showPlaceholders: true,
 
   // Public social profiles. Add more here (and they appear in the Find section).
@@ -112,13 +113,15 @@ export default {
     ],
     contact: {
       text: "To get a loaf, message me.",
-      linkLabel: "hello@example.com",
-      href: "mailto:hello@example.com",
+      linkLabel: "wildatta@gmail.com",
+      href: "mailto:wildatta@gmail.com",
+      phone: "408.656.4664",
+      phoneHref: "tel:+14086564664",
     },
   },
 
   footer: {
-    permit: "CFO-0000-0000",
+    permit: "PT0508049",
     county: "Santa Clara County",
     legal: "Made in a home kitchen. Wild Atta is a California Cottage Food Operation (Class A), permit",
     legalEnd: "Not inspected by the California Department of Public Health.",
