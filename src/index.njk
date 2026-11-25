@@ -3,6 +3,7 @@ layout: base.njk
 ---
 {% from "macros.njk" import ph, photo %}
 {% set show = site.showPlaceholders %}
+{% set hasBakes = thisWeek.bakes and thisWeek.bakes.length %}
 
 {% if show %}
 <aside class="draft-banner" aria-label="Draft notice"><p>Draft. Dotted underlines and hatched boxes mark placeholder copy and photos that still need real content.</p></aside>
@@ -16,7 +17,7 @@ layout: base.njk
     </a>
     <nav aria-label="Primary">
       <ul class="site-nav">
-        {% for item in site.nav %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endfor %}
+        {% for item in site.nav %}{% if item.href != "#bakes" or hasBakes %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endif %}{% endfor %}
       </ul>
     </nav>
   </div>
@@ -32,7 +33,7 @@ layout: base.njk
     <span class="rule rule--short" aria-hidden="true"></span>
     <h1 id="hero-title">{{ site.hero.title }}</h1>
     <p class="lead">{{ site.hero.lead }}</p>
-    <a class="hero__cta" href="#bakes">{{ site.hero.cta }}</a>
+    {% if hasBakes %}<a class="hero__cta" href="#bakes">{{ site.hero.cta }}</a>{% endif %}
     <div class="hero__photo">{{ photo(site.hero.photo, "21 / 9") }}</div>
   </section>
 
@@ -56,6 +57,7 @@ layout: base.njk
     </div>
   </section>
 
+  {% if hasBakes %}
   <section class="section" id="bakes" aria-labelledby="bakes-title">
     <div class="wrap stack">
       <div class="bakes__head">
@@ -65,27 +67,29 @@ layout: base.njk
           <h2 id="bakes-title">{{ site.bakes.title }}</h2>
         </div>
         <p class="tags">
-          <span class="tag tag--olive">{{ ph(site.bakes.week, show) }}</span>
+          {% if thisWeek.week %}<span class="tag tag--olive">{{ ph(thisWeek.week, show) }}</span>{% endif %}
           <span class="tag tag--muted">{{ site.bakes.allergen }}</span>
         </p>
       </div>
+      {% if thisWeek.announcement %}<p class="announcement">{{ thisWeek.announcement }}</p>{% endif %}
       <ul class="bakes">
-        {% for b in site.bakes.items %}
+        {% for b in thisWeek.bakes %}
         <li>
-          <article class="bake">
+          <article class="bake{% if b.soldOut %} bake--sold-out{% endif %}">
             {{ photo({ label: b.name, note: "Crust, close" }, "4 / 5") }}
             <span class="rule rule--hairline" aria-hidden="true"></span>
             <h3>{{ b.name }}</h3>
             <p class="bake__desc">{{ ph(b.description, show) }}</p>
-            <p class="bake__meta">{{ b.meta }}</p>
-            <p class="tags">{% for t in b.tags %}<span class="tag">{{ ph(t, show) }}</span>{% endfor %}</p>
+            {% if b.meta %}<p class="bake__meta">{{ b.meta }}</p>{% endif %}
+            {% if b.tags.length or b.soldOut %}<p class="tags">{% if b.soldOut %}<span class="tag tag--sold-out">Sold out</span>{% endif %}{% for t in b.tags %}<span class="tag">{{ ph(t, show) }}</span>{% endfor %}</p>{% endif %}
           </article>
         </li>
         {% endfor %}
       </ul>
-      <p class="note">{{ site.bakes.note }}</p>
+      {% if thisWeek.bakesNote %}<p class="note">{{ thisWeek.bakesNote }}</p>{% endif %}
     </div>
   </section>
+  {% endif %}
 
   <section class="section section--inverse" id="process" aria-labelledby="process-title">
     <div class="wrap stack">
@@ -122,6 +126,13 @@ layout: base.njk
         <h2 id="find-title">{{ site.find.title }}</h2>
       </div>
       <ul class="cards">
+        {% if thisWeek.pickup %}
+        <li class="card card--brown">
+          <p class="tag tag--muted">Pickup</p>
+          <h3>From my porch</h3>
+          <p>{{ ph(thisWeek.pickup, show) }}</p>
+        </li>
+        {% endif %}
         {% for p in site.find.places %}
         <li class="card card--{{ p.tone }}">
           <p class="tag tag--muted">{{ p.tag }}</p>
@@ -129,6 +140,13 @@ layout: base.njk
           <p>{{ ph(p.body, show) }}</p>
         </li>
         {% endfor %}
+        {% if thisWeek.market and thisWeek.market.show and thisWeek.market.name %}
+        <li class="card card--olive">
+          <p class="tag tag--muted">Market</p>
+          <h3>{{ thisWeek.market.name }}</h3>
+          <p>{% if thisWeek.market.when %}{{ thisWeek.market.when }}{% endif %}{% if thisWeek.market.where %}{% if thisWeek.market.when %}, {% endif %}{{ thisWeek.market.where }}{% endif %}.{% if thisWeek.market.note %} {{ thisWeek.market.note }}{% endif %}</p>
+        </li>
+        {% endif %}
       </ul>
       <div class="contact">
         <p class="contact__text">{{ site.find.contact.text }}</p>

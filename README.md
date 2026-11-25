@@ -19,6 +19,7 @@ npm run build   # writes the finished site to _site/
 
 | Path | What it is |
 |---|---|
+| `src/_data/thisWeek.yml` | The weekly update: this week's bakes, a note, pickup, and an optional market. Edit this each week. |
 | `src/_data/site.js` | All the copy: bakes, process steps, pickup and delivery, footer. Edit text here. |
 | `src/index.njk` | The page markup. |
 | `src/_includes/` | The base layout and the placeholder macros. |
@@ -26,13 +27,31 @@ npm run build   # writes the finished site to _site/
 | `src/assets/fonts/` | Self-hosted fonts, with their licences. |
 | `src/assets/img/` | Logo and favicon. Put real photos here. |
 
+## Weekly updates
+
+Everything that changes week to week lives in `src/_data/thisWeek.yml`, with comments
+explaining each field. You can edit it from a phone, no code needed:
+
+1. In the GitHub app or github.com, open the repository, then `src/_data/thisWeek.yml`, and tap
+   the pencil (Edit).
+2. Change the words between the quote marks. Set `soldOut: true` on a bake that is gone, fill in
+   `announcement` or `pickup` for one-off news, or set `market.show` to `true` and fill in the
+   market details to show a Market card in "Where to find me".
+3. Choose **Commit changes**, pick **Create a new branch** and then **Propose changes**, and open
+   the pull request. `main` is protected, so changes arrive by pull request.
+4. Wait for the checks to go green, then merge. The site updates within a minute or two.
+
+Empty fields and sections that are switched off do not appear on the page. Keep the quote
+marks and the indentation as they are; if a check fails after an edit, a quote mark or
+indent is the usual cause.
+
 ## Placeholders
 
 The page still has invented copy and no photography. While `showPlaceholders` is `true` in
 `src/_data/site.js`, placeholder text gets a dotted underline, photo slots are hatched boxes, and
 a draft note shows at the top. Replace the content, then set `showPlaceholders` to `false`.
 Things to confirm before launch: the Cottage Food permit number and the county's required
-wording, pickup days and hours, delivery radius and fee, market schedule, contact address, and
+wording, pickup days and hours, delivery radius and fee, contact address, and
 the weekly bake list.
 
 ## Deploying

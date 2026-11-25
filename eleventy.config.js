@@ -1,4 +1,9 @@
+import yaml from "js-yaml";
+
 export default function (eleventyConfig) {
+  // Lets src/_data/thisWeek.yml (the weekly update file) be plain YAML.
+  eleventyConfig.addDataExtension("yml,yaml", (contents) => yaml.load(contents));
+
   // Fonts, images and the stylesheet are copied as they are.
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
