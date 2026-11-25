@@ -1,0 +1,9 @@
+# gitleaks configuration. Extends the default ruleset.
+title = "Wild Atta gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Vendored third-party guide text, which contains example snippets"
+paths = ['''^\.claude/skills/modern-web-guidance/guides/''']
