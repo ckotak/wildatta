@@ -18,7 +18,8 @@ week: "Week of 30 November"
 # Leave empty for no note.
 announcement: ""
 
-# What is baking. Add, remove or reorder items freely. Each item starts with "- name".
+# What is baking. If the list is empty, the whole bakes section, its menu link and the
+# "This week’s bake" button disappear. Add, remove or reorder items freely. Each item starts with "- name".
 # Set soldOut to true once a bake is gone; it stays listed with a "Sold out" mark.
 # tags are the small labels, like the day it bakes. Leave tags as [] for none.
 bakesNote: "The list changes with the week and the weather."

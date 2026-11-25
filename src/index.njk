@@ -3,6 +3,7 @@ layout: base.njk
 ---
 {% from "macros.njk" import ph, photo %}
 {% set show = site.showPlaceholders %}
+{% set hasBakes = thisWeek.bakes and thisWeek.bakes.length %}
 
 {% if show %}
 <aside class="draft-banner" aria-label="Draft notice"><p>Draft. Dotted underlines and hatched boxes mark placeholder copy and photos that still need real content.</p></aside>
@@ -16,7 +17,7 @@ layout: base.njk
     </a>
     <nav aria-label="Primary">
       <ul class="site-nav">
-        {% for item in site.nav %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endfor %}
+        {% for item in site.nav %}{% if item.href != "#bakes" or hasBakes %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endif %}{% endfor %}
       </ul>
     </nav>
   </div>
@@ -32,7 +33,7 @@ layout: base.njk
     <span class="rule rule--short" aria-hidden="true"></span>
     <h1 id="hero-title">{{ site.hero.title }}</h1>
     <p class="lead">{{ site.hero.lead }}</p>
-    <a class="hero__cta" href="#bakes">{{ site.hero.cta }}</a>
+    {% if hasBakes %}<a class="hero__cta" href="#bakes">{{ site.hero.cta }}</a>{% endif %}
     <div class="hero__photo">{{ photo(site.hero.photo, "21 / 9") }}</div>
   </section>
 
@@ -56,6 +57,7 @@ layout: base.njk
     </div>
   </section>
 
+  {% if hasBakes %}
   <section class="section" id="bakes" aria-labelledby="bakes-title">
     <div class="wrap stack">
       <div class="bakes__head">
@@ -70,7 +72,6 @@ layout: base.njk
         </p>
       </div>
       {% if thisWeek.announcement %}<p class="announcement">{{ thisWeek.announcement }}</p>{% endif %}
-      {% if thisWeek.bakes and thisWeek.bakes.length %}
       <ul class="bakes">
         {% for b in thisWeek.bakes %}
         <li>
@@ -85,12 +86,10 @@ layout: base.njk
         </li>
         {% endfor %}
       </ul>
-      {% else %}
-      <p class="lead">Nothing is listed for this week yet. Check back soon.</p>
-      {% endif %}
       {% if thisWeek.bakesNote %}<p class="note">{{ thisWeek.bakesNote }}</p>{% endif %}
     </div>
   </section>
+  {% endif %}
 
   <section class="section section--inverse" id="process" aria-labelledby="process-title">
     <div class="wrap stack">
