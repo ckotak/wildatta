@@ -126,11 +126,18 @@ layout: base.njk
         <h2 id="find-title">{{ site.find.title }}</h2>
       </div>
       <ul class="cards">
+        {% if thisWeek.pickup %}
+        <li class="card card--brown">
+          <p class="tag tag--muted">Pickup</p>
+          <h3>From my porch</h3>
+          <p>{{ ph(thisWeek.pickup, show) }}</p>
+        </li>
+        {% endif %}
         {% for p in site.find.places %}
         <li class="card card--{{ p.tone }}">
           <p class="tag tag--muted">{{ p.tag }}</p>
           <h3>{{ p.title }}</h3>
-          <p>{{ ph(thisWeek.pickup if (thisWeek.pickup and p.tag == "Pickup") else p.body, show) }}</p>
+          <p>{{ ph(p.body, show) }}</p>
         </li>
         {% endfor %}
         {% if thisWeek.market and thisWeek.market.show and thisWeek.market.name %}

@@ -91,7 +91,6 @@ export default {
     eyebrow: "Where to find me",
     title: "Gilroy, and about five miles around it",
     places: [
-      { tag: "Pickup", tone: "brown", title: "From my porch", body: "Thursday and Friday, 4–7pm. I’ll send the address when you get in touch." },
       { tag: "Delivery", tone: "terracotta", title: "Within five miles", body: "Gilroy, Morgan Hill and San Martin. Free over two loaves, otherwise $4." },
     ],
     contact: {

@@ -42,9 +42,10 @@ bakes:
     tags: ["Fridays only", "Six per tray"]
     soldOut: false
 
-# Pickup this week, if it differs from the usual. Leave empty to use the usual wording.
+# Pickup this week. This is the text on the "From my porch" card. There is no
+# default: if this is empty, the Pickup card is not shown at all.
 # Example: "Thursday only this week, 4–6pm. I’ll send the address when you get in touch."
-pickup: ""
+pickup: "Thursday and Friday, 4–7pm. I’ll send the address when you get in touch."
 
 # A farmers market or pop-up. Off by default.
 # To switch it on: fill in the details and change show to true.
