@@ -64,6 +64,33 @@ for (const size of sizes) {
   if (overflow > 0) fail(`[${size.name}] page scrolls sideways by ${overflow}px`);
   // The only third-party host allowed is Cloudflare's analytics beacon.
   for (const origin of external) if (origin !== "https://static.cloudflareinsights.com") fail(`[${size.name}] unexpected third-party request to ${origin}`);
+  // Keyboard: every link must show a focus ring and must not hide under the sticky header.
+  const stops = await page.evaluate(async () => {
+    const out = [];
+    const header = document.querySelector(".site-header");
+    for (const el of document.querySelectorAll("a[href], button, input, select, textarea, summary, [tabindex]")) {
+      el.focus({ preventScroll: false });
+      await new Promise((r) => requestAnimationFrame(() => r()));
+      const cs = getComputedStyle(el);
+      const ring = (cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) > 0) || cs.boxShadow !== "none";
+      const top = el.getBoundingClientRect().top;
+      const hidden = !el.classList.contains("skip-link") && !header?.contains(el) && top < header.getBoundingClientRect().bottom;
+      out.push({ name: (el.textContent || el.tagName).trim().slice(0, 40), ring, hidden });
+    }
+    return out;
+  });
+  for (const stop of stops) {
+    if (!stop.ring) fail(`[${size.name}] "${stop.name}" shows no focus indicator`);
+    if (stop.hidden) fail(`[${size.name}] "${stop.name}" is hidden under the sticky header when focused`);
+  }
+  await page.close();
+}
+// Reflow at 320px wide (WCAG 1.4.10): no sideways scrolling.
+{
+  const page = await browser.newPage({ viewport: { width: 320, height: 640 } });
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  if (overflow > 0) fail(`[320px] page scrolls sideways by ${overflow}px`);
   await page.close();
 }
 await browser.close();
