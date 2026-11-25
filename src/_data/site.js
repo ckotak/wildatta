@@ -11,7 +11,7 @@ export default {
   // The one place the public address lives. Canonical, Open Graph and sitemap-style
   // absolute URLs are all built from it. No trailing slash.
   url: "https://wildatta.com",
-  title: "Wild Atta – sourdough and cardamom rolls in Gilroy",
+  title: "Wild Atta – naturally fermented sourdough bread in Gilroy, CA",
   locale: "en_US",
   themeColor: "#F7EFE5",
   // Link-preview image, 1200x630. Path is relative to the site root.
@@ -19,10 +19,11 @@ export default {
     image: "assets/img/share.jpg",
     width: 1200,
     height: 630,
-    alt: "Wild Atta logo: a hand-lettered wordmark with wheat sprigs, beside the words “Naturally leavened bread, baked one batch at a time. Gilroy, California.”",
+    alt: "Wild Atta logo: a hand-lettered wordmark with wheat sprigs, beside the words “Naturally fermented sourdough bread. Gilroy, CA.”",
   },
+  tagline: "Naturally fermented sourdough bread. Gilroy, CA.",
   description:
-    "Naturally leavened bread and cardamom cinnamon rolls, baked one batch at a time in Gilroy, California.",
+    "Naturally fermented sourdough bread. Gilroy, CA. Baked one batch at a time.",
   showPlaceholders: true,
 
   // Public social profiles. Add more here (and they appear in the Find section).
@@ -38,7 +39,7 @@ export default {
   ],
 
   hero: {
-    title: "Naturally leavened bread, baked one batch at a time in Gilroy.",
+    title: "Naturally fermented sourdough bread, baked one batch at a time in Gilroy, CA.",
     lead: "Wild yeast, wholemeal flour, salt, water, and about thirty hours. That’s the whole recipe.",
     cta: "This week’s bake",
     photo: { label: "Hero – crust, close", note: "Warm natural light, cream ground, one whole loaf" },
@@ -54,7 +55,7 @@ export default {
       "No mixer worth the name, no shortcuts worth taking. Just the flour I grew up eating and a fermentation that keeps its own schedule.",
     ],
     quote: "Nothing here rises faster than it wants to.",
-    quoteBy: "Gilroy, California",
+    quoteBy: "Gilroy, CA",
   },
 
   bakes: {
@@ -112,15 +113,17 @@ export default {
     ],
     contact: {
       text: "To get a loaf, message me.",
-      linkLabel: "hello@example.com",
-      href: "mailto:hello@example.com",
+      linkLabel: "wildatta@gmail.com",
+      href: "mailto:wildatta@gmail.com",
+      phone: "408.656.4664",
+      phoneHref: "tel:+14086564664",
     },
   },
 
   footer: {
-    permit: "CFO-0000-0000",
+    permit: "PT0508049",
     county: "Santa Clara County",
-    legal: "Made in a home kitchen. Wild Atta is a California Cottage Food Operation (Class A), permit",
+    legal: "Made in a home kitchen. Wild Atta is a California Cottage Food Operation, permit",
     legalEnd: "Not inspected by the California Department of Public Health.",
     allergens: "Made in a home kitchen that handles wheat, rye, milk, butter, eggs and tree nuts.",
     year: 2026,

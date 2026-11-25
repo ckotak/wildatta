@@ -130,7 +130,7 @@ layout: base.njk
         </li>
         {% endfor %}
       </ul>
-      <p class="contact">{{ site.find.contact.text }} <a href="{{ site.find.contact.href }}">{{ ph(site.find.contact.linkLabel, show) }}</a></p>
+      <p class="contact">{{ site.find.contact.text }} <a href="{{ site.find.contact.href }}">{{ site.find.contact.linkLabel }}</a> or call <a href="{{ site.find.contact.phoneHref }}">{{ site.find.contact.phone }}</a>.</p>
       <p class="contact">Follow along: {% for s in site.social %}<a href="{{ s.href }}" rel="me noopener">{{ s.label }} {{ s.handle }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
     </div>
   </section>
@@ -140,8 +140,8 @@ layout: base.njk
 <footer class="site-footer">
   <div class="wrap footer">
     <img src="assets/img/logo-roundel-96.webp" alt="Wild Atta" width="88" height="88">
-    <p>{{ site.footer.legal }} {{ ph(site.footer.permit, show) }}, issued by {{ ph(site.footer.county, show) }}. {{ site.footer.legalEnd }}</p>
+    <p>{{ site.footer.legal }} {{ site.footer.permit }}, issued by {{ ph(site.footer.county, show) }}. {{ site.footer.legalEnd }}</p>
     <p>{{ site.footer.allergens }}</p>
-    <p class="copyright">© {{ site.footer.year }} Wild Atta · Gilroy, California</p>
+    <p class="copyright">© {{ site.footer.year }} Wild Atta · Gilroy, CA</p>
   </div>
 </footer>
